@@ -1,0 +1,85 @@
+.vc-photo-scroll {
+  position: relative;
+  background: #050608;
+  color: #fff;
+  overflow: hidden;
+}
+.vc-photo-scroll__pin {
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+  overflow: hidden;
+}
+.vc-photo-scroll__image-layer {
+  position: absolute;
+  inset: 0;
+  background: center/cover no-repeat;
+  will-change: transform, opacity;
+}
+.vc-photo-scroll__shade {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(90deg, rgba(1, 2, 4, .74), rgba(1, 2, 4, .1) 68%),
+    linear-gradient(0deg, rgba(1, 2, 4, .6), transparent 45%);
+  pointer-events: none;
+}
+.vc-photo-scroll__copy {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: 6%;
+  right: 6%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  will-change: transform, opacity;
+}
+.vc-photo-scroll__copy h2 {
+  margin: 0;
+  color: #fff;
+  font: 600 clamp(44px, 8vw, 140px)/1 "Playfair Display", "Magnetik", "Manrope", serif;
+  font-style: italic;
+  letter-spacing: -.01em;
+  text-wrap: balance;
+  text-shadow: 0 6px 60px rgba(0, 0, 0, .45);
+}
+.vc-photo-scroll__rule {
+  display: block;
+  width: 74px;
+  height: 1px;
+  margin: 26px 0;
+  background: linear-gradient(90deg, transparent, #E1C989, transparent);
+}
+.vc-photo-scroll__copy .vc-photo-scroll__rule:first-child { margin-bottom: 26px; margin-top: 0; }
+.vc-photo-scroll__copy .vc-photo-scroll__rule:last-child { margin-top: 26px; margin-bottom: 0; }
+.vc-photo-scroll__footer {
+  position: absolute;
+  z-index: 2;
+  left: 10%;
+  right: 10%;
+  bottom: 28px;
+  display: flex;
+  justify-content: space-between;
+  color: #e5e7eb;
+  font: 500 9px/1.35 "DM Mono", monospace;
+  letter-spacing: .15em;
+}
+
+@media (max-width: 720px) {
+  .vc-photo-scroll__pin { height: 100svh; min-height: 520px; }
+  .vc-photo-scroll__copy { left: 8vw; right: 8vw; }
+  .vc-photo-scroll__copy h2 { font-size: 15vw; }
+  .vc-photo-scroll__rule { width: 52px; margin: 18px 0 !important; }
+  .vc-photo-scroll__footer { left: 8vw; right: 8vw; bottom: 20px; font-size: 7px; }
+  .vc-photo-scroll__footer span:last-child { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vc-photo-scroll__pin { height: min(75vw, 620px); min-height: 460px; }
+  .vc-photo-scroll__image-layer:not(:first-of-type),
+  .vc-photo-scroll__copy:not(:first-child) { display: none !important; }
+}

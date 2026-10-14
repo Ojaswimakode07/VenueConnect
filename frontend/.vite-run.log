@@ -1,0 +1,74 @@
+
+> venueconnect-frontend@1.0.0 dev
+> vite --host 127.0.0.1 --port 5173
+
+
+  VITE v5.4.21  ready in 1206 ms
+
+  ➜  Local:   http://127.0.0.1:5173/
+8:45:11 am [vite] hmr update /src/context/AuthContext.jsx, /src/index.css
+8:45:11 am [vite] hmr update /src/context/AuthContext.jsx, /src/index.css
+8:45:12 am [vite] hmr invalidate /src/context/AuthContext.jsx Could not Fast Refresh ("useAuth" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+8:45:12 am [vite] page reload src/context/AuthContext.jsx
+8:45:39 am [vite] hmr update /src/pages/AuthExperience.jsx, /src/index.css
+8:46:31 am [vite] hmr update /src/pages/AuthExperience.jsx, /src/index.css
+8:47:47 am [vite] hmr update /src/pages/AuthExperience.jsx, /src/index.css
+8:57:34 am [vite] hmr update /src/pages/AuthExperience.jsx, /src/index.css
+8:57:42 am [vite] hmr update /src/pages/AuthExperience.jsx, /src/index.css
+9:00:02 am [vite] hmr update /src/components/BookingModal.jsx, /src/index.css
+9:00:02 am [vite] hmr update /src/components/RatingPicker.jsx, /src/index.css
+9:05:15 am [vite] hmr update /src/context/AuthContext.jsx, /src/index.css
+9:05:15 am [vite] hmr update /src/pages/AuthExperience.jsx, /src/index.css
+9:05:15 am [vite] hmr invalidate /src/context/AuthContext.jsx Could not Fast Refresh ("useAuth" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+9:05:15 am [vite] page reload src/context/AuthContext.jsx
+9:05:34 am [vite] page reload src/pages/VenueExperience.jsx
+9:18:15 am [vite] hmr update /src/components/BookingModal.jsx, /src/index.css
+9:18:37 am [vite] hmr update /src/components/BookingModal.jsx, /src/index.css
+9:18:50 am [vite] hmr update /src/components/RatingPicker.jsx, /src/index.css
+9:18:57 am [vite] hmr update /src/pages/VendorProfileDashboard.jsx, /src/index.css
+9:19:41 am [vite] hmr update /src/components/BookingModal.jsx, /src/index.css
+9:20:26 am [vite] hmr update /src/components/RatingPicker.jsx, /src/index.css
+9:20:33 am [vite] hmr update /src/components/BookingModal.jsx, /src/index.css
+9:20:41 am [vite] hmr update /src/pages/VendorProfileDashboard.jsx, /src/index.css
+9:20:41 am [vite] hmr update /src/pages/VendorProfileDashboard.jsx, /src/index.css
+9:23:55 am [vite] hmr update /src/components/BookingModal.jsx, /src/index.css
+9:24:01 am [vite] hmr update /src/components/BookingModal.jsx, /src/index.css
+9:24:07 am [vite] hmr update /src/components/BookingModal.jsx, /src/index.css
+9:24:14 am [vite] hmr update /src/components/BookingModal.jsx, /src/index.css
+9:26:03 am [vite] hmr update /src/components/BookingModal.jsx, /src/index.css
+9:26:10 am [vite] hmr update /src/components/BookingModal.jsx, /src/index.css
+9:27:18 am [vite] hmr update /src/components/BookingModal.jsx, /src/index.css
+9:31:41 am [vite] hmr update /src/pages/OwnerDashboard.jsx, /src/index.css
+9:33:50 am [vite] hmr update /src/pages/OwnerDashboard.jsx, /src/index.css
+9:35:05 am [vite] hmr update /src/pages/CustomerDashboard.jsx, /src/index.css
+9:35:12 am [vite] hmr update /src/pages/CustomerDashboard.jsx, /src/index.css
+9:35:19 am [vite] hmr update /src/pages/CustomerDashboard.jsx, /src/index.css
+9:37:54 am [vite] hmr update /src/pages/OwnerDashboard.jsx, /src/index.css
+9:38:01 am [vite] hmr update /src/pages/VendorProfileDashboard.jsx, /src/index.css
+9:38:01 am [vite] hmr update /src/pages/VendorProfileDashboard.jsx, /src/index.css
+9:41:30 am [vite] hmr update /src/pages/VendorProfileDashboard.jsx, /src/index.css
+9:41:39 am [vite] hmr update /src/pages/OwnerDashboard.jsx, /src/index.css
+9:41:47 am [vite] hmr update /src/pages/VendorProfileDashboard.jsx, /src/index.css
+9:43:34 am [vite] hmr update /src/pages/OwnerDashboard.jsx, /src/index.css
+9:45:52 am [vite] hmr update /src/pages/OwnerDashboard.jsx, /src/index.css
+9:47:23 am [vite] hmr update /src/pages/OwnerDashboard.jsx, /src/index.css
+9:48:37 am [vite] hmr update /src/pages/OwnerDashboard.jsx, /src/index.css
+9:50:37 am [vite] hmr update /src/components/BookingModal.jsx, /src/index.css
+9:53:00 am [vite] hmr update /src/components/BookingModal.jsx, /src/index.css
+9:53:07 am [vite] hmr update /src/components/BookingModal.jsx, /src/index.css
+9:53:14 am [vite] hmr update /src/components/BookingModal.jsx, /src/index.css
+9:53:51 am [vite] hmr update /src/components/BookingModal.jsx, /src/index.css
+9:53:59 am [vite] hmr update /src/components/BookingModal.jsx, /src/index.css
+9:54:42 am [vite] hmr update /src/components/BookingModal.jsx, /src/index.css
+9:56:27 am [vite] hmr update /src/components/BookingModal.jsx, /src/index.css
+9:56:35 am [vite] hmr update /src/components/BookingModal.jsx, /src/index.css
+9:56:42 am [vite] hmr update /src/components/BookingModal.jsx, /src/index.css
+9:56:49 am [vite] hmr update /src/components/BookingModal.jsx, /src/index.css
+10:00:26 am [vite] page reload src/components/VenueCard.jsx
+10:00:35 am [vite] hmr update /src/pages/VenueDetail.jsx, /src/index.css
+10:06:34 am [vite] hmr update /src/components/BookingModal.jsx, /src/index.css
+10:09:06 am [vite] hmr update /src/pages/VenueDetail.jsx, /src/index.css
+10:15:27 am [vite] page reload public/venue-3d.html
+10:19:21 am [vite] hmr update /src/pages/SpaceHome.jsx, /src/index.css
+10:23:34 am [vite] hmr update /src/components/BookingModal.jsx, /src/index.css
+11:55:00 am [vite] page reload public/venue-3d.html

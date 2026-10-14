@@ -1,0 +1,157 @@
+8:57:34 am [vite] Internal server error: C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\src\pages\AuthExperience.jsx: Unexpected token (354:6)
+
+  352 |         )
+  353 |       );
+> 354 |     } catch {
+      |       ^
+  355 |     } finally {
+  356 |       setLoading(false);
+  357 |     }
+  Plugin: vite:react-babel
+  File: C:/Users/ojasw/Downloads/venueconnect-fixed/venueconnect-fixed/frontend/src/pages/AuthExperience.jsx:354:6
+  352|          )
+  353|        );
+  354|      } catch {
+     |        ^
+  355|      } finally {
+  356|        setLoading(false);
+      at constructor (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:369:19)
+      at JSXParserMixin.raise (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:6620:19)
+      at JSXParserMixin.unexpected (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:6640:16)
+      at JSXParserMixin.parseExprAtom (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:11468:22)
+      at JSXParserMixin.parseExprAtom (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:4780:20)
+      at JSXParserMixin.parseExprSubscripts (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:11102:23)
+      at JSXParserMixin.parseUpdate (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:11087:21)
+      at JSXParserMixin.parseMaybeUnary (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:11067:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:10920:61)
+      at JSXParserMixin.parseExprOps (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:10925:23)
+      at JSXParserMixin.parseMaybeConditional (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:10902:23)
+      at JSXParserMixin.parseMaybeAssign (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:10852:21)
+      at JSXParserMixin.parseExpressionBase (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:10805:23)
+      at C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:10801:39
+      at JSXParserMixin.allowInAnd (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:12450:16)
+      at JSXParserMixin.parseExpression (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:10801:17)
+      at JSXParserMixin.parseStatementContent (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:12924:23)
+      at JSXParserMixin.parseStatementLike (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:12796:17)
+      at JSXParserMixin.parseStatementListItem (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:12776:17)
+      at JSXParserMixin.parseBlockOrModuleBlockBody (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:13345:61)
+      at JSXParserMixin.parseBlockBody (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:13338:10)
+      at JSXParserMixin.parseBlock (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:13326:10)
+      at JSXParserMixin.parseFunctionBody (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:12129:24)
+      at JSXParserMixin.parseFunctionBodyAndFinish (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:12115:10)
+      at C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:13474:12
+      at JSXParserMixin.withSmartMixTopicForbiddingContext (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:12432:14)
+      at JSXParserMixin.parseFunction (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:13473:10)
+      at JSXParserMixin.parseFunctionStatement (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:13154:17)
+      at JSXParserMixin.parseStatementContent (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:12919:25)
+      at JSXParserMixin.parseStatementLike (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:12796:17)
+      at JSXParserMixin.parseStatementListItem (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:12776:17)
+      at JSXParserMixin.parseBlockOrModuleBlockBody (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:13345:61)
+      at JSXParserMixin.parseBlockBody (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:13338:10)
+      at JSXParserMixin.parseBlock (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:13326:10)
+      at JSXParserMixin.parseFunctionBody (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:12129:24)
+      at JSXParserMixin.parseFunctionBodyAndFinish (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:12115:10)
+      at C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:13474:12
+      at JSXParserMixin.withSmartMixTopicForbiddingContext (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:12432:14)
+      at JSXParserMixin.parseFunction (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:13473:10)
+      at JSXParserMixin.parseExportDefaultExpression (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:13936:19)
+      at JSXParserMixin.parseExport (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:13857:25)
+      at JSXParserMixin.parseStatementContent (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:12907:27)
+      at JSXParserMixin.parseStatementLike (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:12796:17)
+      at JSXParserMixin.parseModuleItem (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:12773:17)
+      at JSXParserMixin.parseBlockOrModuleBlockBody (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:13345:36)
+      at JSXParserMixin.parseBlockBody (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:13338:10)
+      at JSXParserMixin.parseProgram (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:12651:10)
+      at JSXParserMixin.parseTopLevel (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:12641:25)
+      at JSXParserMixin.parse (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:14517:25)
+      at parse (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:14551:38)
+8:57:34 am [vite] Internal server error: C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\src\pages\AuthExperience.jsx: Unexpected token (354:6)
+
+  352 |         )
+  353 |       );
+> 354 |     } catch {
+      |       ^
+  355 |     } finally {
+  356 |       setLoading(false);
+  357 |     }
+  Plugin: vite:react-babel
+  File: C:/Users/ojasw/Downloads/venueconnect-fixed/venueconnect-fixed/frontend/src/pages/AuthExperience.jsx:354:6
+  352|          )
+  353|        );
+  354|      } catch {
+     |        ^
+  355|      } finally {
+  356|        setLoading(false);
+      at constructor (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:369:19)
+      at JSXParserMixin.raise (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:6620:19)
+      at JSXParserMixin.unexpected (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:6640:16)
+      at JSXParserMixin.parseExprAtom (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:11468:22)
+      at JSXParserMixin.parseExprAtom (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:4780:20)
+      at JSXParserMixin.parseExprSubscripts (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:11102:23)
+      at JSXParserMixin.parseUpdate (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:11087:21)
+      at JSXParserMixin.parseMaybeUnary (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:11067:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:10920:61)
+      at JSXParserMixin.parseExprOps (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:10925:23)
+      at JSXParserMixin.parseMaybeConditional (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:10902:23)
+      at JSXParserMixin.parseMaybeAssign (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:10852:21)
+      at JSXParserMixin.parseExpressionBase (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:10805:23)
+      at C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:10801:39
+      at JSXParserMixin.allowInAnd (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:12450:16)
+      at JSXParserMixin.parseExpression (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:10801:17)
+      at JSXParserMixin.parseStatementContent (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:12924:23)
+      at JSXParserMixin.parseStatementLike (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:12796:17)
+      at JSXParserMixin.parseStatementListItem (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:12776:17)
+      at JSXParserMixin.parseBlockOrModuleBlockBody (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:13345:61)
+      at JSXParserMixin.parseBlockBody (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:13338:10)
+      at JSXParserMixin.parseBlock (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:13326:10)
+      at JSXParserMixin.parseFunctionBody (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:12129:24)
+      at JSXParserMixin.parseFunctionBodyAndFinish (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:12115:10)
+      at C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:13474:12
+      at JSXParserMixin.withSmartMixTopicForbiddingContext (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:12432:14)
+      at JSXParserMixin.parseFunction (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:13473:10)
+      at JSXParserMixin.parseFunctionStatement (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:13154:17)
+      at JSXParserMixin.parseStatementContent (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:12919:25)
+      at JSXParserMixin.parseStatementLike (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:12796:17)
+      at JSXParserMixin.parseStatementListItem (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:12776:17)
+      at JSXParserMixin.parseBlockOrModuleBlockBody (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:13345:61)
+      at JSXParserMixin.parseBlockBody (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:13338:10)
+      at JSXParserMixin.parseBlock (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:13326:10)
+      at JSXParserMixin.parseFunctionBody (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:12129:24)
+      at JSXParserMixin.parseFunctionBodyAndFinish (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:12115:10)
+      at C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:13474:12
+      at JSXParserMixin.withSmartMixTopicForbiddingContext (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:12432:14)
+      at JSXParserMixin.parseFunction (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:13473:10)
+      at JSXParserMixin.parseExportDefaultExpression (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:13936:19)
+      at JSXParserMixin.parseExport (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:13857:25)
+      at JSXParserMixin.parseStatementContent (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:12907:27)
+      at JSXParserMixin.parseStatementLike (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:12796:17)
+      at JSXParserMixin.parseModuleItem (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:12773:17)
+      at JSXParserMixin.parseBlockOrModuleBlockBody (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:13345:36)
+      at JSXParserMixin.parseBlockBody (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:13338:10)
+      at JSXParserMixin.parseProgram (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:12651:10)
+      at JSXParserMixin.parseTopLevel (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:12641:25)
+      at JSXParserMixin.parse (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:14517:25)
+      at parse (C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\node_modules\@babel\parser\lib\index.js:14551:38)
+node:internal/fs/watchers:321
+    const error = new UVException({
+                  ^
+
+Error: EBUSY: resource busy or locked, watch 'C:\Users\ojasw\Downloads\venueconnect-fixed\venueconnect-fixed\frontend\public\makers\rutuja-avhad.jpeg'
+    at FSWatcher.<computed> (node:internal/fs/watchers:321:19)
+    at Object.watch (node:fs:2548:36)
+    at createFsWatchInstance (file:///C:/Users/ojasw/Downloads/venueconnect-fixed/venueconnect-fixed/frontend/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:42780:17)
+    at setFsWatchListener (file:///C:/Users/ojasw/Downloads/venueconnect-fixed/venueconnect-fixed/frontend/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:42827:15)
+    at NodeFsHandler._watchWithNodeFs (file:///C:/Users/ojasw/Downloads/venueconnect-fixed/venueconnect-fixed/frontend/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:42982:14)
+    at NodeFsHandler._handleFile (file:///C:/Users/ojasw/Downloads/venueconnect-fixed/venueconnect-fixed/frontend/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:43046:23)
+    at NodeFsHandler._addToNodeFs (file:///C:/Users/ojasw/Downloads/venueconnect-fixed/venueconnect-fixed/frontend/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:43288:21)
+Emitted 'error' event on FSWatcher instance at:
+    at FSWatcher._handleError (file:///C:/Users/ojasw/Downloads/venueconnect-fixed/venueconnect-fixed/frontend/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:44481:10)
+    at NodeFsHandler._addToNodeFs (file:///C:/Users/ojasw/Downloads/venueconnect-fixed/venueconnect-fixed/frontend/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:43296:18) {
+  errno: -4082,
+  syscall: 'watch',
+  code: 'EBUSY',
+  path: 'C:\\Users\\ojasw\\Downloads\\venueconnect-fixed\\venueconnect-fixed\\frontend\\public\\makers\\rutuja-avhad.jpeg',
+  filename: 'C:\\Users\\ojasw\\Downloads\\venueconnect-fixed\\venueconnect-fixed\\frontend\\public\\makers\\rutuja-avhad.jpeg'
+}
+
+Node.js v24.18.0

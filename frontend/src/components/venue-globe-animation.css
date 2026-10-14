@@ -1,0 +1,114 @@
+/* ------------------------------------------------------------------
+   venue-globe-animation.css
+   Scoped styles for the globe-to-venue scroll animation.
+   Every selector is namespaced with `.vga-` or lives inside
+   `.venue-animation-container` so nothing here leaks into or
+   overrides the rest of the site's existing styles.
+------------------------------------------------------------------- */
+
+/* Your placeholder section. Height here defines how "tall" the
+   pinned experience feels before ScrollTrigger's `end` value takes
+   over — keep at least a full viewport so the pin has room to work. */
+.venue-animation-container {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+  background: #05070d; /* dark fallback shown before Three.js mounts */
+}
+
+/* Wrapper the script injects to host the <canvas>. Kept separate
+   from the overlay so z-index / pointer-events stay predictable. */
+.vga-canvas-host {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.vga-canvas-host canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Text/CTA overlay for the Phase 3 venue reveal. Starts invisible;
+   GSAP fades it in (autoAlpha) partway through the timeline. */
+.vga-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 0 1.5rem 8vh;
+  pointer-events: none; /* re-enabled on the inner block below */
+  opacity: 0;
+  visibility: hidden;
+}
+
+.vga-overlay-inner {
+  pointer-events: auto;
+  text-align: center;
+  max-width: 32rem;
+  color: #f5f2ec;
+}
+
+.vga-eyebrow {
+  margin: 0 0 0.5rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #ffb648;
+  font-weight: 600;
+}
+
+.vga-headline {
+  margin: 0 0 1.25rem;
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  line-height: 1.15;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.vga-cta {
+  appearance: none;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  background: #ffb648;
+  color: #1a1206;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.75rem 1.75rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.vga-cta:hover {
+  background: #ffc873;
+  transform: translateY(-2px);
+}
+
+.vga-cta:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
+/* Small screens: keep the pinned section shorter and text tighter
+   so the scroll distance doesn't feel excessive on mobile. */
+@media (max-width: 640px) {
+  .venue-animation-container {
+    min-height: 70vh;
+  }
+  .vga-overlay {
+    padding-bottom: 6vh;
+  }
+}
+
+/* Respect reduced-motion users: skip the scroll-scrub camera moves
+   and just show the venue reveal state. Pairs with the JS check
+   documented in the README. */
+@media (prefers-reduced-motion: reduce) {
+  .vga-overlay {
+    transition: none;
+  }
+}

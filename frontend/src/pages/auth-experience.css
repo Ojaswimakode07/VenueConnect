@@ -1,0 +1,535 @@
+/* =========================================================
+   AUTH EXPERIENCE — shared container for Login / Sign up /
+   Forgot password. Visual language borrowed from the Jitter
+   invite screen: dark canvas, purple glow, Plus Jakarta Sans,
+   rounded glass panels.
+
+   IMPORTANT: everything is scoped under .auth-exp so nothing
+   here ever touches html/body globally. That was the bug that
+   made the very first page's scroll stop working — the old
+   login.css set `html, body { overflow: hidden }` at the
+   document level, and because Login.jsx was imported eagerly
+   from App.jsx, that rule was active from the moment the app
+   booted, before the person ever opened the login page.
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+.auth-exp {
+  /* Solid black, no video, no glow — and the same blue already
+     used elsewhere in the app (see html:has(.vc-space) scrollbar
+     rule in index.css: #149ce5), not purple. */
+  --bg: #000000;
+  --surface: #141414;
+  --surface-border: rgba(255, 255, 255, 0.12);
+  --text-primary: #f4f3f7;
+  --text-secondary: #9a98a6;
+  --text-muted: #6b6975;
+  --accent-start: #1fb0f0;
+  --accent-end: #0d6fad;
+  --accent-solid: #149ce5;
+
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+
+  height: 100dvh;
+  width: 100%;
+
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+
+  background: var(--bg);
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--text-primary);
+
+  padding: 48px 64px;
+  box-sizing: border-box;
+}
+
+.auth-exp * { box-sizing: border-box; }
+
+.auth-exp .wordmark {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* =========================================================
+   BACK — top-left pill. Behaviour changes with screen (see
+   AuthExperience.jsx) but the look stays consistent.
+   ========================================================= */
+
+.auth-exp__back {
+  position: absolute;
+  top: 46px;
+  left: 64px;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 10px 18px;
+  border-radius: 999px;
+
+  border: 1px solid var(--surface-border);
+  background: rgba(255, 255, 255, 0.04);
+
+  color: var(--text-secondary);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.auth-exp__back:hover {
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: var(--text-primary);
+}
+
+.auth-exp .stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 140px);
+}
+
+.auth-exp .layout {
+  display: flex;
+  align-items: flex-start;
+  gap: 88px;
+  max-width: 980px;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.auth-exp .pitch {
+  flex: 1 1 360px;
+  min-width: 300px;
+}
+
+.auth-exp .avatar {
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background: linear-gradient(150deg, var(--accent-start), var(--accent-end));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 26px;
+  color: #fff;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.06), 0 16px 40px -12px rgba(20, 156, 229, 0.5);
+  margin-bottom: 34px;
+}
+
+.auth-exp .pitch h1 {
+  font-size: 56px;
+  line-height: 1.06;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0 0 20px;
+}
+
+.auth-exp .lede {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  max-width: 34ch;
+  margin: 0;
+}
+
+/* Chip that shows which profile is currently selected, so it's
+   always clear which experience will open once you sign in. */
+.auth-exp__profile-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  margin-top: 28px;
+  padding: 8px 14px 8px 8px;
+
+  border-radius: 999px;
+  border: 1px solid var(--surface-border);
+  background: var(--surface);
+
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.auth-exp__profile-chip span.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: linear-gradient(150deg, var(--accent-start), var(--accent-end));
+  color: #fff;
+  font-size: 13px;
+}
+
+.auth-exp__profile-chip strong {
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+.auth-exp__profile-chip button {
+  border: none;
+  background: transparent;
+  color: var(--accent-start);
+  font-family: inherit;
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 4px;
+}
+
+.auth-exp__profile-chip button:hover {
+  text-decoration: underline;
+}
+
+/* =========================================================
+   PANEL — right-hand interactive side. Holds the profile
+   grid, the login/signup form, or the forgot-password form
+   depending on the current screen.
+   ========================================================= */
+
+.auth-exp__panel {
+  flex: 1 1 380px;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.auth-exp__eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 0 0 4px;
+}
+
+/* =========================================================
+   PROFILE STAGE — "What describes you best?" screen. Full
+   width, centered, numbered cards with an arrow — this is the
+   original screen, kept as-is, just on a solid black canvas
+   with the app's own blue instead of a purple redesign.
+   ========================================================= */
+
+.auth-exp__profile-stage {
+  min-height: calc(100vh - 96px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 4px;
+}
+
+.auth-exp__eyebrow--center {
+  text-align: center;
+  color: var(--accent-solid);
+}
+
+.auth-exp__center-heading {
+  font-size: clamp(38px, 5.4vw, 64px);
+  line-height: 1.08;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 4px 0 14px;
+}
+
+.auth-exp__center-lede {
+  max-width: 46ch;
+  margin: 0 auto 44px;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 15.5px;
+}
+
+.auth-exp__profiles-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(280px, 1fr));
+  gap: 20px;
+  width: 100%;
+  max-width: 900px;
+}
+
+.auth-exp__profile-card {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+
+  padding: 26px 28px;
+  border-radius: 16px;
+
+  border: 1px solid var(--surface-border);
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--text-primary);
+
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease, background 0.18s ease;
+}
+
+.auth-exp__profile-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.auth-exp__profile-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  transition: border-color 0.18s ease, color 0.18s ease;
+}
+
+.auth-exp__profile-arrow {
+  font-size: 17px;
+  color: var(--text-muted);
+  transition: color 0.18s ease, transform 0.18s ease;
+}
+
+.auth-exp__profile-card strong {
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.auth-exp__profile-card small {
+  color: var(--text-secondary);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.auth-exp__profile-card:hover {
+  border-color: rgba(20, 156, 229, 0.55);
+  box-shadow: 0 0 0 3px rgba(20, 156, 229, 0.14);
+  background: rgba(20, 156, 229, 0.05);
+  transform: translateY(-3px);
+}
+
+.auth-exp__profile-card:hover .auth-exp__profile-badge {
+  border-color: var(--accent-solid);
+  color: var(--accent-solid);
+}
+
+.auth-exp__profile-card:hover .auth-exp__profile-arrow {
+  color: var(--accent-solid);
+  transform: translate(2px, -2px);
+}
+
+@media (max-width: 720px) {
+  .auth-exp__profiles-grid { grid-template-columns: 1fr; }
+}
+
+/* Form fields --------------------------------------------------- */
+
+.auth-exp__field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.auth-exp input,
+.auth-exp textarea {
+  width: 100%;
+  height: 52px;
+  padding: 0 16px;
+  border-radius: 12px;
+  border: 1px solid var(--surface-border);
+  background: var(--surface);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 14.5px;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.auth-exp textarea {
+  height: auto;
+  min-height: 84px;
+  padding: 12px 16px;
+  resize: vertical;
+}
+
+.auth-exp input::placeholder,
+.auth-exp textarea::placeholder {
+  color: var(--text-muted);
+}
+
+.auth-exp input:focus,
+.auth-exp textarea:focus {
+  border-color: rgba(20, 156, 229, 0.65);
+  box-shadow: 0 0 0 3px rgba(20, 156, 229, 0.18);
+}
+
+.auth-exp__password-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.auth-exp__password-row input {
+  padding-right: 64px;
+}
+
+.auth-exp__password-toggle {
+  position: absolute;
+  right: 14px;
+
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  font-family: inherit;
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.auth-exp__password-toggle:hover {
+  color: var(--text-primary);
+}
+
+.auth-exp__forgot {
+  align-self: flex-end;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  font-family: inherit;
+  font-size: 12.5px;
+  cursor: pointer;
+  padding: 0;
+  margin-top: -2px;
+}
+
+.auth-exp__forgot:hover {
+  color: var(--accent-start);
+}
+
+.auth-exp__error {
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(214, 92, 78, 0.35);
+  background: rgba(214, 92, 78, 0.12);
+  color: #ffb3a7;
+  font-size: 13px;
+}
+
+/* Actions / buttons ---------------------------------------------- */
+
+.auth-exp .actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.auth-exp button.btn-primary,
+.auth-exp button.btn-secondary {
+  font-family: inherit;
+  font-size: 14.5px;
+  font-weight: 700;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  padding: 15px 26px;
+  transition: transform 0.15s ease, filter 0.15s ease, background 0.15s ease;
+}
+
+.auth-exp button.btn-primary {
+  flex: 1;
+  background: linear-gradient(150deg, var(--accent-start), var(--accent-end));
+  color: #fff;
+}
+
+.auth-exp button.btn-primary:hover:not(:disabled) {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+
+.auth-exp button.btn-primary:disabled {
+  opacity: 0.7;
+  cursor: default;
+  transform: none;
+}
+
+.auth-exp button.btn-secondary {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-secondary);
+}
+
+.auth-exp button.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+}
+
+.auth-exp__switch {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.auth-exp__switch button {
+  border: none;
+  background: transparent;
+  color: var(--accent-start);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0;
+}
+
+.auth-exp__switch button:hover {
+  text-decoration: underline;
+}
+
+.auth-exp__success {
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(20, 156, 229, 0.35);
+  background: rgba(20, 156, 229, 0.12);
+  color: var(--text-primary);
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+
+@media (max-width: 720px) {
+  .auth-exp { padding: 32px 24px; }
+  .auth-exp .pitch h1 { font-size: 40px; }
+  .auth-exp .layout { gap: 44px; }
+  .auth-exp__back { top: 28px; left: 24px; }
+  .auth-exp__profiles { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .auth-exp * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

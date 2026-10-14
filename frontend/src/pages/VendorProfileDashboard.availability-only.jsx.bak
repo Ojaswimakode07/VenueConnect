@@ -1,0 +1,201 @@
+import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import api from "../api/axios.js";
+import { useAuth } from "../context/AuthContext.jsx";
+
+const SERVICE_ICONS = {
+  photographer: "📷",
+  catering: "🍽️",
+  music: "🎵",
+  decor: "🎨",
+};
+
+// Standalone service-provider dashboard — a single-flow, portrait-style
+// profile page instead of the owner's sidebar/tabs layout. Warmer accent
+// palette (accent/rose) so it reads as a distinct product, not a re-skin.
+export default function VendorProfileDashboard() {
+  const { user } = useAuth();
+  const [services, setServices] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [msg, setMsg] = useState("");
+  const [blockForm, setBlockForm] = useState({});
+
+  async function loadServices() {
+    setLoading(true);
+    const res = await api.get("/vendor/services");
+    setServices(res.data);
+    setLoading(false);
+  }
+
+  useEffect(() => {
+    loadServices();
+  }, []);
+
+  async function toggleService(service) {
+    const nextValue = !service.is_available;
+    setServices((prev) => prev.map((s) => (s.id === service.id ? { ...s, is_available: nextValue } : s)));
+    try {
+      const res = await api.patch(`/vendor/services/${service.id}`, { is_available: nextValue });
+      setServices((prev) => prev.map((s) => (s.id === service.id ? res.data : s)));
+    } catch (err) {
+      setServices((prev) => prev.map((s) => (s.id === service.id ? { ...s, is_available: !nextValue } : s)));
+    }
+  }
+
+  function setBlockField(serviceId, field, value) {
+    setBlockForm((prev) => ({ ...prev, [serviceId]: { ...prev[serviceId], [field]: value } }));
+  }
+
+  async function addBlockedRange(serviceId) {
+    const draft = blockForm[serviceId];
+    if (!draft?.start_date || !draft?.end_date) return;
+    try {
+      const res = await api.post(`/vendor/services/${serviceId}/unavailability`, {
+        start_date: draft.start_date,
+        end_date: draft.end_date,
+      });
+      setServices((prev) => prev.map((s) => (s.id === serviceId ? res.data : s)));
+      setBlockForm((prev) => ({ ...prev, [serviceId]: { start_date: "", end_date: "" } }));
+    } catch (err) {
+      setMsg(err?.response?.data?.detail || "Could not add that date range.");
+    }
+  }
+
+  async function removeBlockedRange(serviceId, rangeId) {
+    try {
+      const res = await api.delete(`/vendor/services/unavailability/${rangeId}`);
+      setServices((prev) => prev.map((s) => (s.id === serviceId ? res.data : s)));
+    } catch (err) {
+      // ignore
+    }
+  }
+
+  return (
+    <div className="max-w-3xl mx-auto px-5 py-10">
+      {/* ===== Profile header ===== */}
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="rounded-3xl bg-gradient-to-br from-accent to-accent-light/60 text-white p-8 mb-8 relative overflow-hidden"
+      >
+        <div className="absolute inset-0 bg-mesh-panel opacity-30 pointer-events-none" />
+        <div className="relative flex items-center gap-4">
+          <div className="w-16 h-16 rounded-2xl bg-white/15 border border-white/25 flex items-center justify-center text-3xl backdrop-blur-sm">
+            {SERVICE_ICONS[user?.vendor_type] || "✨"}
+          </div>
+          <div>
+            <p className="text-[11px] uppercase tracking-[3px] text-white/70 font-bold mb-1">Service Provider</p>
+            <h1 className="font-serif text-2xl font-bold">{user?.full_name}</h1>
+            <p className="text-sm text-white/80 capitalize">{user?.vendor_type}</p>
+          </div>
+        </div>
+      </motion.div>
+
+      <p className="text-sm text-gray-500 mb-6">
+        Keep your availability current — customers browsing the Services page see this live.
+      </p>
+
+      {loading ? (
+        <p className="text-gray-400 text-center py-16">Loading your profile…</p>
+      ) : services.length === 0 ? (
+        <div className="rounded-2xl border border-dashed border-accent/40 p-10 text-center text-gray-400">
+          No service profile found yet.
+        </div>
+      ) : (
+        <div className="space-y-6">
+          {services.map((s) => (
+            <motion.div
+              key={s.id}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="rounded-2xl bg-white border border-black/5 shadow-card overflow-hidden"
+            >
+              <div className="p-6 flex items-start gap-4 border-b border-black/5">
+                <div className="text-4xl leading-none">{SERVICE_ICONS[s.service_type] || "✨"}</div>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center justify-between gap-3">
+                    <h3 className="font-serif text-lg font-bold text-plum-dark">{s.name}</h3>
+                    <span
+                      className={`text-[11px] font-bold uppercase tracking-wide px-3 py-1 rounded-full whitespace-nowrap ${
+                        s.is_available ? "bg-teal/15 text-teal" : "bg-rose/15 text-rose"
+                      }`}
+                    >
+                      {s.is_available ? "Available" : "Unavailable"}
+                    </span>
+                  </div>
+                  {s.city && <p className="text-xs text-accent font-semibold mt-0.5">📍 {s.city}</p>}
+                  <p className="text-sm text-gray-500 mt-1">{s.description}</p>
+                </div>
+              </div>
+
+              <div className="p-6 flex flex-col sm:flex-row sm:items-center gap-4 justify-between">
+                <button
+                  onClick={() => toggleService(s)}
+                  className={`text-sm font-semibold px-5 py-2.5 rounded-full transition-colors self-start ${
+                    s.is_available
+                      ? "bg-rose/10 text-rose hover:bg-rose/20"
+                      : "bg-teal/10 text-teal hover:bg-teal/20"
+                  }`}
+                >
+                  {s.is_available ? "Mark as Unavailable" : "Mark as Available"}
+                </button>
+              </div>
+
+              <div className="px-6 pb-6">
+                <div className="rounded-xl bg-panel/60 p-4">
+                  <p className="text-xs font-semibold text-gray-500 mb-2">Booked / unavailable dates</p>
+                  {s.unavailable_ranges.length === 0 ? (
+                    <p className="text-xs text-gray-400 mb-3">No blocked dates — fully open right now.</p>
+                  ) : (
+                    <div className="flex flex-wrap gap-1.5 mb-3">
+                      {s.unavailable_ranges.map((r) => (
+                        <div key={r.id} className="flex items-center gap-2 bg-white rounded-lg px-3 py-1.5 text-xs border border-black/5">
+                          <span className="text-plum-dark font-medium">{r.start_date} → {r.end_date}</span>
+                          <button
+                            onClick={() => removeBlockedRange(s.id, r.id)}
+                            className="text-rose hover:text-rose font-bold"
+                            title="Remove"
+                          >
+                            ✕
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                  <div className="flex flex-wrap items-end gap-2">
+                    <div>
+                      <label className="text-[11px] text-gray-400 block">From</label>
+                      <input
+                        type="date"
+                        className="input !py-1.5 !text-xs !w-auto"
+                        value={blockForm[s.id]?.start_date || ""}
+                        onChange={(e) => setBlockField(s.id, "start_date", e.target.value)}
+                      />
+                    </div>
+                    <div>
+                      <label className="text-[11px] text-gray-400 block">To</label>
+                      <input
+                        type="date"
+                        className="input !py-1.5 !text-xs !w-auto"
+                        value={blockForm[s.id]?.end_date || ""}
+                        onChange={(e) => setBlockField(s.id, "end_date", e.target.value)}
+                      />
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => addBlockedRange(s.id)}
+                      className="text-xs font-semibold px-4 py-2 rounded-full bg-accent text-white hover:bg-accent/90"
+                    >
+                      Block Dates
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+          {msg && <p className="text-sm text-rose font-semibold">{msg}</p>}
+        </div>
+      )}
+    </div>
+  );
+}

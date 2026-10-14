@@ -1,0 +1,618 @@
+/* =========================================
+   PAGE SHELL — fills the viewport exactly,
+   never taller than it, so there is nothing
+   left for the browser to scroll.
+   ========================================= */
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.venue-login-page {
+  position: fixed;
+  inset: 0;
+
+  width: 100%;
+  height: 100dvh;
+
+  overflow: hidden;
+
+  /* Solid black — no gradient, no glow. */
+  background: #000;
+}
+
+.venue-login-panel {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Sits above everything. Framer Motion drives its opacity from
+   1 → 0 on mount (see blackoutVariants in Login.jsx); pointer-events
+   is off from the start since it's purely visual and the real
+   content is already interactive underneath it. */
+.venue-login-blackout {
+  position: absolute;
+  inset: 0;
+
+  z-index: 40;
+
+  background: #000;
+
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .venue-login-blackout {
+    display: none;
+  }
+}
+
+
+/* =========================================
+   BACK — fixed top-left pill
+   ========================================= */
+
+.venue-login-back {
+  position: fixed;
+  top: 24px;
+  left: 24px;
+
+  z-index: 20;
+}
+
+.venue-login-back a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 10px 18px;
+
+  border-radius: 999px;
+
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.04);
+
+  color: #fff;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  text-decoration: none;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.venue-login-back a:hover {
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(255, 255, 255, 0.28);
+}
+
+
+/* =========================================
+   LOGIN — CENTERED CARD, NO BACKGROUND VIDEO
+   ========================================= */
+
+.venue-login-content {
+  position: relative;
+  z-index: 10;
+
+  width: 400px;
+  max-width: calc(100vw - 40px);
+  max-height: 94dvh;
+
+  box-sizing: border-box;
+
+  color: #fff;
+
+  /* If a very short window ever makes this taller than the
+     viewport, it scrolls internally — the page itself never does. */
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.venue-login-content::-webkit-scrollbar {
+  display: none;
+}
+
+
+/* =========================================
+   LOGIN CARD
+   ========================================= */
+
+.venue-login-card {
+  position: relative;
+
+  width: 100%;
+
+  box-sizing: border-box;
+
+  padding: 24px 26px;
+
+  border-radius: 16px;
+
+  /* Subtle presence — NOT a giant black box */
+  background: rgba(12, 12, 12, 0.76);
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.28);
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  overflow: hidden;
+}
+
+/* A single slow light sweep around the card edge — the one
+   deliberate ambient motion on the page. Everything else only
+   moves in response to something the person does. */
+.venue-login-card::before {
+  content: "";
+
+  position: absolute;
+  inset: -1px;
+
+  border-radius: inherit;
+  padding: 1px;
+
+  background: conic-gradient(
+    from var(--sweep-angle, 0deg),
+    transparent 0%,
+    rgba(64, 145, 255, 0.6) 8%,
+    transparent 20%
+  );
+
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+
+  animation: sweep-angle 6s linear infinite;
+
+  pointer-events: none;
+}
+
+@property --sweep-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@keyframes sweep-angle {
+  to {
+    --sweep-angle: 360deg;
+  }
+}
+
+
+/* =========================================
+   TITLE
+   ========================================= */
+
+.venue-login-title {
+  position: relative;
+
+  margin: 0 0 22px;
+
+  font-family: Georgia, "Times New Roman", serif;
+
+  font-size: 34px;
+  line-height: 1.05;
+  font-weight: 500;
+
+  letter-spacing: -0.035em;
+
+  color: #fff;
+
+  text-align: center;
+}
+
+
+/* =========================================
+   FORM
+   ========================================= */
+
+.venue-login-form {
+  display: flex;
+  flex-direction: column;
+
+  gap: 14px;
+}
+
+.venue-login-field {
+  display: flex;
+  flex-direction: column;
+
+  gap: 6px;
+}
+
+.venue-login-label {
+  font-size: 11px;
+  font-weight: 700;
+
+  color: rgba(255, 255, 255, 0.72);
+
+  transition: color 0.2s ease;
+}
+
+.venue-login-field:focus-within .venue-login-label {
+  color: #4091ff;
+}
+
+.venue-login-input {
+  width: 100%;
+  height: 52px;
+
+  box-sizing: border-box;
+
+  padding: 0 15px;
+
+  border-radius: 9px;
+
+  border: 1px solid rgba(255, 255, 255, 0.14);
+
+  outline: none;
+
+  background: rgba(255, 255, 255, 0.055);
+
+  color: #fff;
+
+  font-size: 13px;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.venue-login-input::placeholder {
+  color: rgba(255, 255, 255, 0.34);
+}
+
+.venue-login-input:focus {
+  border-color: rgba(64, 145, 255, 0.75);
+
+  background: rgba(255, 255, 255, 0.075);
+
+  box-shadow: 0 0 0 3px rgba(64, 145, 255, 0.16);
+}
+
+
+/* =========================================
+   ERROR — a short, direct shake draws the eye
+   without lingering or feeling decorative
+   ========================================= */
+
+.venue-login-error {
+  padding: 9px 12px;
+
+  border-radius: 8px;
+
+  border: 1px solid rgba(214, 92, 78, 0.35);
+  background: rgba(214, 92, 78, 0.12);
+
+  color: #ffb3a7;
+
+  font-size: 12px;
+
+  animation: error-shake 0.4s ease;
+}
+
+@keyframes error-shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-6px); }
+  40% { transform: translateX(5px); }
+  60% { transform: translateX(-3px); }
+  80% { transform: translateX(2px); }
+}
+
+
+/* =========================================
+   FORGOT PASSWORD
+   ========================================= */
+
+.venue-login-forgot {
+  align-self: flex-end;
+
+  margin-top: -1px;
+
+  padding: 0;
+
+  border: 0;
+
+  background: transparent;
+
+  cursor: pointer;
+
+  font-size: 11px;
+
+  color: rgba(255, 255, 255, 0.5);
+
+  transition: color 0.2s ease;
+}
+
+.venue-login-forgot:hover {
+  color: #4091ff;
+}
+
+.venue-login-forgot:disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+
+
+/* =========================================
+   FORGOT PASSWORD — OTP TIMER / RESEND ROW
+   ========================================= */
+
+.venue-login-otp-row {
+  display: flex;
+  justify-content: flex-end;
+
+  margin-top: -4px;
+}
+
+.venue-login-timer {
+  font-size: 11px;
+  font-weight: 600;
+
+  color: rgba(255, 255, 255, 0.4);
+
+  letter-spacing: 0.02em;
+}
+
+/* Success/notice state — same shape as the error banner but calmer,
+   used to confirm an OTP was (re)sent or a password was reset. */
+.venue-login-notice {
+  padding: 9px 12px;
+
+  border-radius: 8px;
+
+  border: 1px solid rgba(64, 145, 255, 0.35);
+  background: rgba(64, 145, 255, 0.1);
+
+  color: #bcdcff;
+
+  font-size: 12px;
+}
+
+
+/* =========================================
+   SIGN IN
+   ========================================= */
+
+.venue-login-submit {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  width: 100%;
+  height: 51px;
+
+  margin-top: 3px;
+
+  border: none;
+  border-radius: 9px;
+
+  background: #2f6fed;
+
+  color: #fff;
+
+  cursor: pointer;
+
+  font-size: 11px;
+  font-weight: 800;
+
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.venue-login-submit:hover {
+  background: #4585f5;
+
+  transform: translateY(-1px);
+
+  box-shadow: 0 8px 22px rgba(47, 111, 237, 0.35);
+}
+
+.venue-login-submit:active {
+  transform: translateY(0);
+}
+
+.venue-login-submit:disabled {
+  cursor: default;
+}
+
+/* Small spinner shown only while a request is in flight —
+   motion that reports real state, not decoration. */
+.venue-login-spinner {
+  width: 13px;
+  height: 13px;
+
+  border-radius: 50%;
+
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #fff;
+
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+
+/* =========================================
+   BACK
+   ========================================= */
+
+.venue-login-change {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  width: 100%;
+
+  margin-top: 14px;
+
+  padding: 6px;
+
+  border: none;
+
+  background: transparent;
+
+  color: rgba(255, 255, 255, 0.48);
+
+  cursor: pointer;
+
+  font-size: 11px;
+
+  transition: 0.2s ease;
+}
+
+.venue-login-change:hover {
+  color: #fff;
+}
+
+
+/* =========================================
+   SIGN UP / BACK HOME
+   ========================================= */
+
+.venue-login-signup {
+  margin: 18px 0 0;
+
+  font-size: 12.5px;
+  text-align: center;
+
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.venue-login-signup a {
+  color: #4091ff;
+
+  font-weight: 700;
+
+  text-decoration: none;
+}
+
+.venue-login-signup a:hover {
+  text-decoration: underline;
+}
+
+/* Same look as the sign-up/login link above, but a real <button>
+   since it now toggles the card's mode in place instead of
+   navigating to a different route. */
+.venue-login-switch {
+  padding: 0;
+
+  border: 0;
+  background: transparent;
+
+  color: #4091ff;
+
+  font: inherit;
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+.venue-login-switch:hover {
+  text-decoration: underline;
+}
+
+.venue-login-home {
+  margin-top: 10px;
+
+  text-align: center;
+}
+
+.venue-login-home a {
+  font-size: 12px;
+
+  color: rgba(255, 255, 255, 0.42);
+
+  text-decoration: none;
+
+  transition: color 0.2s ease;
+}
+
+.venue-login-home a:hover {
+  color: #fff;
+}
+
+
+/* =========================================
+   REDUCED MOTION — respected globally
+   ========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .venue-login-card::before {
+    animation: none;
+    display: none;
+  }
+
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+
+/* =========================================
+   SMALL SCREENS
+   ========================================= */
+
+@media (max-height: 750px) {
+  .venue-login-card {
+    padding: 20px 23px;
+  }
+
+  .venue-login-header {
+    margin-bottom: 15px;
+  }
+
+  .venue-login-form {
+    gap: 11px;
+  }
+
+  .venue-login-input {
+    height: 47px;
+  }
+
+  .venue-login-submit {
+    height: 47px;
+  }
+}
+
+@media (max-width: 800px) {
+  .venue-login-content {
+    width: min(400px, calc(100vw - 32px));
+  }
+}
